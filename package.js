@@ -18,10 +18,16 @@ Package.onUse(function (api) {
     'both/daigo.js',
     'both/collections.js'
   ], both);
-  api.addFiles([
-  ], 'server');
 
   api.export('Daigo', both);
   api.export('DaigoEvents', both);
   api.export('DaigoRules', both);
+});
+
+Package.onTest(function (api) {
+  api.use('daigo:core', both);
+  api.use(['tinytest', 'test-helpers', 'accounts-password'], both);
+  api.addFiles(['tests/helpers.js', 'tests/both_tests.js'], both);
+  api.addFiles(['tests/client_tests.js'], 'client');
+  api.addFiles(['tests/server_tests.js'], 'server');
 });

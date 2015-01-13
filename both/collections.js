@@ -42,3 +42,16 @@ DaigoRules.allow({
   },
   fetch: ['rules']
 });
+
+/*
+ * Meteor.users security
+ */
+Meteor.users.allow({
+  update: function (userId, doc) {
+    if (Meteor.users.findOne({daigoAdmin: true})) {
+      throw new Meteor.Error('There is already one admin set. If you want to change, do it on mongo.');
+    }
+
+    return true;
+  }
+});
