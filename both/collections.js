@@ -26,13 +26,14 @@ DaigoRules.allow({
       throw new Meteor.Error('You are trying to add a unrecognized rule.');
     }
 
-    return userId === Daigo.adminUserId;
+    console.log(userId, Daigo.getAdminId());
+    return userId === Daigo.getAdminId();
   },
   remove: function (userId, doc) {
-    return userId === Daigo.adminUserId;
+    return userId === Daigo.getAdminId();
   },
   update: function (userId, doc) {
-    return userId === Daigo.adminUserId;
+    return userId === Daigo.getAdminId();
   },
   fetch: []
 });

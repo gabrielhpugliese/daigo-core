@@ -10,8 +10,7 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@0.9.2');
 
-  api.imply('daigo:points', both);
-
+  api.use('daigo:points', both);
   api.use('matb33:collection-hooks', both);
   api.use(['underscore', 'mongo'], both);
 
@@ -29,8 +28,8 @@ Package.onUse(function (api) {
 
 Package.onTest(function (api) {
   api.use('daigo:core', both);
-  api.use(['tinytest', 'test-helpers'], both);
+  api.use(['tinytest', 'test-helpers', 'meteor', 'accounts-password'], both);
+  api.addFiles(['tests/helpers.js', 'tests/both_tests.js'], both);
   api.addFiles(['tests/client_tests.js'], 'client');
   api.addFiles(['tests/server_tests.js'], 'server');
-  api.addFiles(['tests/both_tests.js'], both);
 });

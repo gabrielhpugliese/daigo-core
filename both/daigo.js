@@ -1,7 +1,11 @@
-Daigo = function (options) {
-  if (_.isEmpty(options.adminUserId)) {
-    throw new Meteor.Error('You need to initialize Daigo with adminUserId option');
-  }
+Daigo = (new function () {
+  this.adminUserId = null;
 
-  this.adminUserId = options.adminUserId;
-};
+  this.setAdminId = function (adminUserId) {
+    this.adminUserId = adminUserId;
+  };
+
+  this.getAdminId = function () {
+    return this.adminUserId;
+  };
+}());
