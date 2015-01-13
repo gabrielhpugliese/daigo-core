@@ -10,7 +10,7 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@0.9.2');
 
-  api.use('daigo:points', both);
+  api.use('daigo:points', both, {weak: true});
   api.use('matb33:collection-hooks', both);
   api.use(['underscore', 'mongo'], both);
 
