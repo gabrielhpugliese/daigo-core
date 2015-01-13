@@ -1,11 +1,7 @@
 Daigo = (new function () {
-  this.adminUserId = null;
-
-  this.setAdminId = function (adminUserId) {
-    this.adminUserId = adminUserId;
-  };
-
-  this.getAdminId = function () {
-    return this.adminUserId;
+  this.setAdmin = function (_id) {
+    return Meteor.users.update({_id: _id}, {$set: {
+      daigoAdmin: true
+    }});
   };
 }());

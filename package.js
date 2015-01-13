@@ -12,7 +12,7 @@ Package.onUse(function (api) {
 
   api.use('daigo:points', both, {weak: true});
   api.use('matb33:collection-hooks', both);
-  api.use(['underscore', 'mongo'], both);
+  api.use(['underscore', 'mongo', 'accounts-base'], both);
 
   api.addFiles([
     'both/daigo.js',
@@ -24,12 +24,4 @@ Package.onUse(function (api) {
   api.export('Daigo', both);
   api.export('DaigoEvents', both);
   api.export('DaigoRules', both);
-});
-
-Package.onTest(function (api) {
-  api.use('daigo:core', both);
-  api.use(['tinytest', 'test-helpers', 'meteor', 'accounts-password'], both);
-  api.addFiles(['tests/helpers.js', 'tests/both_tests.js'], both);
-  api.addFiles(['tests/client_tests.js'], 'client');
-  api.addFiles(['tests/server_tests.js'], 'server');
 });
