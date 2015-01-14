@@ -4,11 +4,19 @@ DaigoRules = new Mongo.Collection('daigo_rules');
 /*
  * DaigoRules methods
  */
-DaigoRules.add = function (name, rules) {
+DaigoRules.add = function (name, description, rules) {
   return DaigoRules.insert({
     name: name,
+    description: description,
     rules: rules
   });
+};
+
+/*
+ * DaigoEvents methods
+ */
+DaigoEvents.add = function (name) {
+  return DaigoEvents.insert({name: name});
 };
 
 /*
@@ -16,12 +24,16 @@ DaigoRules.add = function (name, rules) {
  */
 DaigoRules.allow({
   insert: function (userId, doc) {
-    var rulesPattern = {
-      points: Match.Optional(Match.Integer)
-    };
+    var pattern = {
+      name: String,
+      description: String,
+      points: Match.ObjectIncluding({
+        points: Match.Optional(Match.Integer)
+      })
+    }
 
     try {
-      Match.test(doc.rules, rulesPattern);
+      Match.test(doc, pattern);
     } catch (err) {
       throw new Meteor.Error('You are trying to add a unrecognized rule.');
     }
@@ -41,6 +53,15 @@ DaigoRules.allow({
     return user && user.daigoAdmin;
   },
   fetch: ['rules']
+});
+
+/*
+ * DaigoEvents security
+ */
+DaigoEvents.allow({
+  insert: function (userId, doc) {
+    return true;
+  }
 });
 
 /*

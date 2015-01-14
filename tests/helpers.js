@@ -1,7 +1,7 @@
 Meteor.methods({
-  createDummyUser: function () {
+  createDummyUser: function (email) {
     var _id = Accounts.createUser({
-      email: Math.floor(Math.random() * 100000000) + '@dummy.com',
+      email: email,
       password: 'admin6'
     });
 
@@ -21,7 +21,13 @@ Meteor.methods({
   removeAllUsers: function () {
     return Meteor.users.remove({});
   },
+  removeAllDaigoEvents: function () {
+    return DaigoEvents.remove({});
+  },
   getAdminCount: function () {
     return Meteor.users.find({daigoAdmin: true}).count();
+  },
+  getDaigoEventsCount: function () {
+    return DaigoEvents.find().count();
   }
 });
